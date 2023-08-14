@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MusicCollection;
+use App\Http\Resources\MusicResource;
+use App\Models\Music;
 use Illuminate\Http\Request;
 
 class MusicController extends Controller
@@ -11,7 +14,8 @@ class MusicController extends Controller
      */
     public function index()
     {
-        //
+        $music= Music::all();
+        return response()->json([new MusicCollection($music)],200);
     }
 
     /**
@@ -35,7 +39,7 @@ class MusicController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
