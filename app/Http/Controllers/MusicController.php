@@ -39,7 +39,10 @@ class MusicController extends Controller
      */
     public function show(string $id)
     {
-
+        $music=Music::findorFail($id);
+        return response()->json([
+            'data'=>new MusicResource($music),
+            ],200);
     }
 
     /**
