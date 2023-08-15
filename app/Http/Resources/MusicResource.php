@@ -18,7 +18,7 @@ class MusicResource extends JsonResource
             'name'=>$this->name,
             'singer'=>$this->singer,
             'image'=>$this->image,
-            'spotify'=>$this->soptifyUrl
+            'spotify'=>$this->spotifyUrl
         ];
     }
 }
