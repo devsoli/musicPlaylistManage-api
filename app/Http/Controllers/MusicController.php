@@ -62,7 +62,7 @@ class MusicController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        //\
     }
 
     /**
@@ -70,7 +70,11 @@ class MusicController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $music=Music::findOrFail($id);
+        $music->update($request->all());
+        return response()->json([
+            'message'=>'Updated',
+        ],200);
     }
 
     /**
