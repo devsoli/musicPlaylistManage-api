@@ -82,7 +82,10 @@ class MusicController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Music::findOrFail($id)->delete();
+        return response()->json([
+            'message'=>"Deleted"
+        ],200);
     }
 
     private function validateMusic(Request $request): void{
