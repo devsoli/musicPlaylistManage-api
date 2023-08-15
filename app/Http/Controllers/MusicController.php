@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreMusicRequest;
 use App\Http\Resources\MusicCollection;
 use App\Http\Resources\MusicResource;
 use App\Models\Music;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MusicController extends Controller
 {
@@ -31,7 +32,18 @@ class MusicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validateMusic($request);
+        Music::create([
+            'name'=>$request->name,
+            'singer'=>$request->singer,
+            'image'=>$this->uploadImage($request),
+            'spotifyUrl'=>$request->spotify,
+
+        ]);
+
+        return response()->json([
+            'message'=>'Created Music.'
+        ],201);
     }
 
     /**
@@ -68,4 +80,16 @@ class MusicController extends Controller
     {
         //
     }
+
+    private function validateMusic(Request $request): void{
+        $request->validate([
+            'name' => ['required'],['max:40'],
+            'singer' => ['required'], ['max:70'],
+            'image' => ['nullable'],
+            'spotifyUrl' => ['nullable']]);
+    }
+    private function uploadImage(Request $request){
+        return $request->hasFile('image')?$request->image->store('public'):null;
+    }
+
 }
