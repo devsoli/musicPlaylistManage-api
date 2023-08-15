@@ -17,7 +17,10 @@ class MusicCollection extends ResourceCollection
         return [
             'data'=>MusicResource::collection($this->collection),
             'meta'=>[
-                'count'=>count($this->collection)
+                'count'=>$this->total(),
+                'total_page'=>$this->lastPage(),
+                'current_page'=>$this->currentPage(),
+                'per_page'=>$this->perPage()
             ]
         ];
     }

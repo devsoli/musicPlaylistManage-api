@@ -15,7 +15,7 @@ class MusicController extends Controller
      */
     public function index()
     {
-        $music= Music::all();
+        $music= Music::paginate();
         return response()->json([new MusicCollection($music)],200);
     }
 
@@ -57,13 +57,6 @@ class MusicController extends Controller
             ],200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //\
-    }
 
     /**
      * Update the specified resource in storage.
